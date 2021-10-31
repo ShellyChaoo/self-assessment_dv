@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <style>
+      body{
+        padding-top: 10px;
+        padding-bottom: 20px;
+        padding-left: 200px;
+        padding-right: 200px;
+      }
+      div.center{
+        margin: auto;
+        /* width: 75%; */
+        border: 3px;
+        padding: 10px;
+        padding-top: 30px;
+      }
+      div.item{
+        padding-bottom: 25px;
+      }
+    </style> 
+  </head>
+  <body>
+    <!-- Create a div where the graph will take place -->
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Summary</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Chart</a>
+      </div>
+    </nav>
+    <div class="tab-content center" id="nav-tabContent">
+      <!-- summary -->
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="card">
+          <h5 class="card-header">Health Assessment Questionnaire Results</h5>
+          <div class="card-body">
+            <div class="row g-2">
+              <div class="col-sm-10">
+                <h5 class="card-title">Your depression test score was    Minimal Depression</h5>
+              </div>
+              <div class="col-sm">
+                <h5 class="card-title text-success">25/100</h5>
+              </div>
+            </div>
+            
+            <p class="card-text">Your results indicate that you have none, or very few symptoms of depression.
+
+              <br>If you notice that your symptoms aren’t improving, you may want to bring them up with someone you trust.</p>
+            <div class="row g-2 item">
+              <div class="col-sm">
+                <h6 class="card-title">1. Little interst or pleasure in doing things</h6>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked disabled>
+                    <label class="form-check-label" for="gridRadios1">
+                      Not at all
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" disabled>
+                    <label class="form-check-label" for="gridRadios2">
+                      Several days
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios3">
+                      Nearly every day
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <h6 class="card-title">2. Feeling down, depressed or hopeless</h6>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios4" value="option1" checked disabled>
+                    <label class="form-check-label" for="gridRadios4">
+                      Not at all
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios5" value="option2" disabled>
+                    <label class="form-check-label" for="gridRadios5">
+                      Several days
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios6" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios6">
+                      Nearly every day
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-2 item">
+              <div class="col-sm ">
+                <h6 class="card-title">3. Trouble falling or staying asleep, or sleeping too much </h6>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios3" id="gridRadios7" value="option1" checked disabled>
+                    <label class="form-check-label" for="gridRadios7">
+                      Not at all
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios3" id="gridRadios8" value="option2" disabled>
+                    <label class="form-check-label" for="gridRadios8">
+                      Several days
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios3" id="gridRadios9" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios9">
+                      Nearly every day
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <h6 class="card-title">4. Feeling tired or having little energy</h6>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios4" id="gridRadios10" value="option1" checked disabled>
+                    <label class="form-check-label" for="gridRadios10">
+                      Not at all
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios4" id="gridRadios12" value="option2" disabled>
+                    <label class="form-check-label" for="gridRadios11">
+                      Several days
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios4" id="gridRadios12" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios12">
+                      Nearly every day
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-2 item">
+              <div class="col-sm ">
+                <h6 class="card-title">5. Poor appetite or overeating </h6>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios5" id="gridRadios13" value="option1" disabled>
+                    <label class="form-check-label" for="gridRadios13">
+                      Not at all
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios5" id="gridRadios14" value="option2" checked disabled>
+                    <label class="form-check-label" for="gridRadios14">
+                      Several days
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios5" id="gridRadios15" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios15">
+                      Nearly every day
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <h6 class="card-title">6. Feeling bad about yourself - or that you are a failure or have let yourself or your family down</h6>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios6" id="gridRadios16" value="option1" disabled>
+                    <label class="form-check-label" for="gridRadios16">
+                      Not at all
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios6" id="gridRadios17" value="option2" checked disabled>
+                    <label class="form-check-label" for="gridRadios17">
+                      Several days
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios6" id="gridRadios18" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios18">
+                      Nearly every day
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            ......
+          </div>
+        </div>
+
+      </div>
+      <!-- charts -->
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <h5>Distribution</h5>
+        <div class="item" id="my_dataviz"></div>
+        <h5>Correlation</h5>
+
+      </div>
+    </div>
+
+    <script>
+
+      // set the dimensions and margins of the graph
+    const margin = {top: 10, right: 30, bottom: 30, left: 40},
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    const svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              `translate(${margin.left}, ${margin.top})`);
+
+    // get the data
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv").then( function(data) {
+
+      // X axis: scale and draw:
+      const x = d3.scaleLinear()
+          .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+          .range([0, width]);
+      svg.append("g")
+          .attr("transform", `translate(0, ${height})`)
+          .call(d3.axisBottom(x));
+
+      // set the parameters for the histogram
+      const histogram = d3.histogram()
+          .value(function(d) { return d.price; })   // I need to give the vector of value
+          .domain(x.domain())  // then the domain of the graphic
+          .thresholds(x.ticks(10)); // then the numbers of bins
+
+      // And apply this function to data to get the bins
+      const bins = histogram(data);
+
+      // Y axis: scale and draw:
+      const y = d3.scaleLinear()
+          .range([height, 0]);
+          y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+      svg.append("g")
+          .call(d3.axisLeft(y));
+
+      // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
+      // Its opacity is set to 0: we don't see it by default.
+      const tooltip = d3.select("#my_dataviz")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "black")
+        .style("color", "white")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+      // A function that change this tooltip when the user hover a point.
+      // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+      const showTooltip = function(event,d) {
+        tooltip
+          .transition()
+          .duration(100)
+          .style("opacity", 1)
+        tooltip
+          .html("Range: " + d.x0 + " - " + d.x1)
+          .style("left", (event.x)/2+ "px")
+          .style("top", (event.y)/2 + "px")
+      }
+      const moveTooltip = function(event,d) {
+        tooltip
+        .style("left", (event.x) + "px")
+        .style("top", (event.y)/2 + "px")
+      }
+      // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+      const hideTooltip = function(event,d) {
+        tooltip
+          .transition()
+          .duration(100)
+          .style("opacity", 0)
+      }
+
+      // append the bar rectangles to the svg element
+      svg.selectAll("rect")
+          .data(bins)
+          .join("rect")
+            .attr("x", 1)
+            .attr("transform", function(d) { return `translate(${x(d.x0)}, ${y(d.length)})`})
+            .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+            .attr("height", function(d) { return height - y(d.length); })
+            .style("fill", "#69b3a2")
+            // Show tooltip on hover
+            .on("mouseover", showTooltip )
+            .on("mousemove", moveTooltip )
+            .on("mouseleave", hideTooltip )
+      svg
+        .append("line")
+        .attr("x1", x(25) )
+        .attr("x2", x(25) )
+        .attr("y1", y(0))
+        .attr("y2", y(900))
+        .attr("stroke", "grey")
+        .attr("stroke-dasharray", "4")
+      svg
+        .append("text")
+        .attr("x", x(10))
+        .attr("y", y(600))
+        .text("You are here: 25")
+        .style("font-size", "15px")
+      
+      });
+    </script>
+  </body>
+</html>
+
+        
