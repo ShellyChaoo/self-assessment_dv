@@ -1,7 +1,7 @@
  // set the dimensions and margins of the graph
  const margin = {top: 10, right: 30, bottom: 30, left: 40},
- width = 460 - margin.left - margin.right,
- height = 400 - margin.top - margin.bottom;
+ width = 260 - margin.left - margin.right,
+ height = 250 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 const histo_svg = d3.select("#my_dataviz")
@@ -86,9 +86,9 @@ histo_svg.selectAll("rect")
      .attr("height", function(d) { return height - y(d.length); })
      .style("fill", function(d){ if(d.x0==3){return "orange"} else {return "#69b3a2"}})
      // Show tooltip on hover
-     .on("mouseover", showTooltip )
-     .on("mousemove", moveTooltip )
-     .on("mouseleave", hideTooltip )
+    //  .on("mouseover", showTooltip )
+    //  .on("mousemove", moveTooltip )
+    //  .on("mouseleave", hideTooltip )
 histo_svg
  .append("line")
  .attr("x1", x(3.5) )
@@ -109,7 +109,8 @@ histo_svg
      .attr("text-anchor", "end")
      .attr("x", width)
      .attr("y", height + margin.top + 20)
-     .text("Score");
+     .text("Score")
+     .style("font-size", "12px");
 
  // Y axis label:
  histo_svg.append("text")
@@ -118,6 +119,7 @@ histo_svg
      .attr("y", -margin.left+20)
      .attr("x", -margin.top)
      .text("Count")
+     .style("font-size", "12px");
 
 });
 
@@ -205,11 +207,6 @@ d3.csv("https://raw.githubusercontent.com/ShellyChaoo/self-assessment_dv/master/
       .attr("r", 5)
       .style("fill", function(d){ if(d.name=="z"){return "orange"} else {return "#69b3a2"}})
     //   .style("fill", function (d) { return color(d.sex) } )
-// color legend
-//   scatter_svg.append("circle").attr("cx",width-50).attr("cy",40).attr("r", 6).style("fill", "#69b3a2")
-//   scatter_svg.append("circle").attr("cx",width-50).attr("cy",60).attr("r", 6).style("fill", "#404080")
-//   scatter_svg.append("text").attr("x", width-40).attr("y", 40).text("female").style("font-size", "15px").attr("alignment-baseline","middle")
-//   scatter_svg.append("text").attr("x", width-40).attr("y", 60).text("male").style("font-size", "15px").attr("alignment-baseline","middle")
 
 scatter_svg
  .append("line")
@@ -229,23 +226,24 @@ scatter_svg
  .attr("stroke-dasharray", "3");
 scatter_svg
  .append("text")
- .attr("x", x(3.25))
- .attr("y", y(36))
+ .attr("x", x(3.5))
+ .attr("y", y(29))
  .text("Age: 30")
- .style("font-size", "15px");
+ .style("font-size", "12px");
 scatter_svg
  .append("text")
- .attr("x", x(3.25))
- .attr("y", y(32))
+ .attr("x", x(3.5))
+ .attr("y", y(24))
  .text("Score: 3")
- .style("font-size", "15px");
+ .style("font-size", "12px");
 
 // Add X axis label:
  scatter_svg.append("text")
      .attr("text-anchor", "end")
      .attr("x", width)
      .attr("y", height + margin.top + 20)
-     .text("Score");
+     .text("Score")
+     .style("font-size", "12px");
 
  // Y axis label:
  scatter_svg.append("text")
@@ -254,13 +252,14 @@ scatter_svg
      .attr("y", -margin.left+15)
      .attr("x", -margin.top)
      .text("Age")
+     .style("font-size", "12px");
 
 });
 
 // set the dimensions and margins of the graph
-const piewidth = 450,
-    pieheight = 450,
-    piemargin = 40;
+const piewidth = 226,
+    pieheight = 226,
+    piemargin = 25;
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
 const radius = Math.min(piewidth, pieheight) / 2 - piemargin
@@ -278,7 +277,7 @@ const piedata1 = {"Not at all": 9, "Several days": 10, "More than half days":20,
 // set the color scale
 const piecolor = d3.scaleOrdinal()
   .domain(["Not at all", "Several days", "More than half days", "Nearly every day"])
-  .range(["#B3CC66", "#1C5453", "#612163", "#D6CB85"])
+  .range(["#B3CC66", "#69b3a2", "#612163", "#D6CB85"])
 function update(data){
     // Compute the position of each group on the pie:
     const pie = d3.pie()
@@ -306,23 +305,16 @@ function update(data){
     .attr('fill', d => piecolor(d.data[1]))
     .attr("stroke", "white")
     .style("stroke-width", "2px")
-    .style("opacity", 0.7)
+    // .style("opacity", 0.7)
 
-    // Add the polylines between chart and labels:
-    pie_svg
-    .selectAll('allLabels')
-    .data(data_ready)
-    .join('text')
-    .text(d => d.data[0])
-    .attr('transform', function(d) {
-        const pos = outerArc.centroid(d);
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-        pos[0] = radius * 0.4 * (midangle < Math.PI ? 1 : -1);
-        return `translate(${pos})`;
-    })
-    .style('text-anchor', function(d) {
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-        return (midangle < Math.PI ? 'start' : 'end')
-    })
+    pie_svg.append("circle").attr("cx",-105).attr("cy",85).attr("r", 6).style("fill", "#B3CC66")
+    pie_svg.append("circle").attr("cx",-105).attr("cy",100).attr("r", 6).style("fill", "#69b3a2")
+    pie_svg.append("circle").attr("cx",0).attr("cy",85).attr("r", 6).style("fill", "#612163")
+    pie_svg.append("circle").attr("cx",0).attr("cy",100).attr("r", 6).style("fill", "#D6CB85")
+    pie_svg.append("text").attr("x", -95).attr("y", 85).text("Not at all").style("font-size", "15px").attr("alignment-baseline","middle")
+    pie_svg.append("text").attr("x", -95).attr("y", 100).text("Several days").style("font-size", "15px").attr("alignment-baseline","middle")
+    pie_svg.append("text").attr("x", 10).attr("y", 85).text("More than half day").style("font-size", "15px").attr("alignment-baseline","middle")
+    pie_svg.append("text").attr("x", 10).attr("y", 100).text("Every day").style("font-size", "15px").attr("alignment-baseline","middle")
+
 }
 update(piedata1)
